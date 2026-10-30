@@ -1,26 +1,239 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *, .dark, .dark *));
+
+@theme {
+  --color-brand-navy: #0a0f1d;
+  --color-brand-indigo: #4f46e5;
+  --color-brand-amber: #f59e0b;
+  --color-brand-coral: #fb7185;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card-bg: rgba(255, 255, 255, 0.88);
+  --card-border: rgba(148, 163, 184, 0.25);
+
+  /* Default theme palette: Amber & Indigo */
+  --primary-from: #4f46e5;
+  --primary-via: #f59e0b;
+  --primary-to: #f43f5e;
+  --accent-primary: #4f46e5;
+  --accent-secondary: #f59e0b;
+  --accent-glow: rgba(245, 158, 11, 0.4);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  --background: #070b14;
+  --foreground: #f8fafc;
+  --card-bg: rgba(15, 23, 42, 0.75);
+  --card-border: rgba(255, 255, 255, 0.08);
+
+  --primary-from: #818cf8;
+  --primary-via: #fbbf24;
+  --primary-to: #fb7185;
+  --accent-primary: #6366f1;
+  --accent-secondary: #f59e0b;
+  --accent-glow: rgba(251, 191, 36, 0.4);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Palette 1: Amber & Indigo */
+html[data-color-theme="amber-indigo"] {
+  --primary-from: #4f46e5;
+  --primary-via: #f59e0b;
+  --primary-to: #f43f5e;
+  --accent-primary: #4f46e5;
+  --accent-secondary: #f59e0b;
+  --accent-glow: rgba(245, 158, 11, 0.4);
+}
+html[data-color-theme="amber-indigo"].dark {
+  --primary-from: #818cf8;
+  --primary-via: #fbbf24;
+  --primary-to: #fb7185;
+  --accent-primary: #6366f1;
+  --accent-secondary: #f59e0b;
+  --accent-glow: rgba(251, 191, 36, 0.4);
+}
+
+/* Palette 2: Cyber Cyan & Sky */
+html[data-color-theme="cyber-cyan"] {
+  --primary-from: #0284c7;
+  --primary-via: #06b6d4;
+  --primary-to: #3b82f6;
+  --accent-primary: #0284c7;
+  --accent-secondary: #06b6d4;
+  --accent-glow: rgba(6, 182, 212, 0.4);
+}
+html[data-color-theme="cyber-cyan"].dark {
+  --primary-from: #38bdf8;
+  --primary-via: #22d3ee;
+  --primary-to: #60a5fa;
+  --accent-primary: #0ea5e9;
+  --accent-secondary: #22d3ee;
+  --accent-glow: rgba(34, 211, 238, 0.4);
+}
+
+/* Palette 3: Emerald & Teal */
+html[data-color-theme="emerald-teal"] {
+  --primary-from: #059669;
+  --primary-via: #10b981;
+  --primary-to: #14b8a6;
+  --accent-primary: #059669;
+  --accent-secondary: #10b981;
+  --accent-glow: rgba(16, 185, 129, 0.4);
+}
+html[data-color-theme="emerald-teal"].dark {
+  --primary-from: #34d399;
+  --primary-via: #10b981;
+  --primary-to: #2dd4bf;
+  --accent-primary: #10b981;
+  --accent-secondary: #34d399;
+  --accent-glow: rgba(52, 211, 153, 0.4);
+}
+
+/* Palette 4: Electric Violet & Rose */
+html[data-color-theme="electric-violet"] {
+  --primary-from: #7c3aed;
+  --primary-via: #c026d3;
+  --primary-to: #f43f5e;
+  --accent-primary: #7c3aed;
+  --accent-secondary: #c026d3;
+  --accent-glow: rgba(192, 38, 211, 0.4);
+}
+html[data-color-theme="electric-violet"].dark {
+  --primary-from: #a78bfa;
+  --primary-via: #e879f9;
+  --primary-to: #fb7185;
+  --accent-primary: #8b5cf6;
+  --accent-secondary: #e879f9;
+  --accent-glow: rgba(232, 121, 249, 0.4);
+}
+
+/* Palette 5: Warm Coral & Gold */
+html[data-color-theme="warm-coral"] {
+  --primary-from: #ea580c;
+  --primary-via: #f59e0b;
+  --primary-to: #e11d48;
+  --accent-primary: #ea580c;
+  --accent-secondary: #f59e0b;
+  --accent-glow: rgba(245, 158, 11, 0.4);
+}
+html[data-color-theme="warm-coral"].dark {
+  --primary-from: #fb923c;
+  --primary-via: #fbbf24;
+  --primary-to: #f43f5e;
+  --accent-primary: #f97316;
+  --accent-secondary: #fbbf24;
+  --accent-glow: rgba(251, 146, 60, 0.4);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent-primary);
+  opacity: 0.5;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-secondary);
+}
+
+/* Interactive text gradient utilities */
+.theme-gradient-text {
+  background: linear-gradient(135deg, var(--primary-from) 0%, var(--primary-via) 50%, var(--primary-to) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-block;
+}
+
+.theme-gradient-text:hover {
+  background-position: right center;
+  filter: drop-shadow(0 0 14px var(--accent-glow));
+}
+
+.theme-accent-text {
+  color: var(--accent-secondary);
+  transition: color 0.3s ease;
+}
+
+.theme-accent-bg {
+  background-color: var(--accent-primary);
+  transition: background-color 0.3s ease;
+}
+
+.theme-accent-border {
+  border-color: var(--accent-secondary);
+  transition: border-color 0.3s ease;
+}
+
+/* Glassmorphism helpers */
+.glass-panel {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.dark .glass-pill {
+  background: rgba(15, 23, 42, 0.6);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Aceternity cards-demo-3 beam animation */
+@keyframes moveBeam {
+  0% {
+    top: -20%;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+.animate-move {
+  animation: moveBeam 3s ease-in-out infinite;
+}
+
+/* Ambient glow background helper */
+.ambient-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
 }
