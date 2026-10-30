@@ -55,7 +55,7 @@ export interface AchievementItem {
 export interface SkillCategory {
   category: string;
   description: string;
-  skills: { name: string; tag?: string; description?: string; icon?: string }[];
+  skills: { name: string; tag?: string; description?: string; icon?: string; proficiency?: number }[];
 }
 
 export const portfolioData = {

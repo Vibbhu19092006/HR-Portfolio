@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 import { portfolioData } from "@/data/portfolio";
 import {
   Users,
@@ -16,7 +16,6 @@ import {
   Award,
   Sparkles,
   ShieldCheck,
-  Target,
   Code,
   Database,
   Shield,

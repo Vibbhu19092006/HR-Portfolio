@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useSyncExternalStore } from "react";
 import { Palette, Sparkles, Check } from "lucide-react";
 
 export interface ColorTheme {
@@ -55,22 +55,43 @@ export const COLOR_THEMES: ColorTheme[] = [
   },
 ];
 
+const emptySubscribe = () => () => {};
+
+function subscribeTheme(callback: () => void) {
+  window.addEventListener("theme-change", callback);
+  return () => window.removeEventListener("theme-change", callback);
+}
+
+function getThemeSnapshot(): string {
+  return localStorage.getItem("hr_color_theme") || "amber-indigo";
+}
+
+function getThemeServerSnapshot(): string {
+  return "amber-indigo";
+}
+
 export function ThemeCustomizer() {
-  const [activeTheme, setActiveTheme] = useState<string>("amber-indigo");
   const [isOpen, setIsOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+  const activeTheme = useSyncExternalStore(
+    subscribeTheme,
+    getThemeSnapshot,
+    getThemeServerSnapshot
+  );
 
   useEffect(() => {
-    setMounted(true);
     const savedTheme = localStorage.getItem("hr_color_theme") || "amber-indigo";
-    setActiveTheme(savedTheme);
     document.documentElement.setAttribute("data-color-theme", savedTheme);
   }, []);
 
   const changeTheme = (themeId: string) => {
-    setActiveTheme(themeId);
     document.documentElement.setAttribute("data-color-theme", themeId);
     localStorage.setItem("hr_color_theme", themeId);
+    window.dispatchEvent(new CustomEvent("theme-change"));
   };
 
   if (!mounted) return null;

@@ -11,8 +11,6 @@ import {
   Copy,
   Check,
   ArrowUp,
-  MessageSquare,
-  Sparkles,
   CheckCircle2,
   AlertCircle,
 } from "lucide-react";

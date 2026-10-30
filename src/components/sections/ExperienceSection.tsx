@@ -15,8 +15,6 @@ import {
   Trophy,
   LayoutGrid,
   Clock,
-  Sparkles,
-  Calendar,
 } from "lucide-react";
 
 export function ExperienceSection() {

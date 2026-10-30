@@ -1,14 +1,37 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useSyncExternalStore } from "react";
 import { motion, useScroll, useSpring } from "motion/react";
 import { portfolioData } from "@/data/portfolio";
-import { Moon, Sun, Menu, X, FileDown, Sparkles } from "lucide-react";
+import { Moon, Sun, Menu, X, FileDown } from "lucide-react";
 import { ThemeCustomizer } from "@/components/ThemeCustomizer";
 
+const emptySubscribe = () => () => {};
+
+function subscribeDarkTheme(callback: () => void) {
+  window.addEventListener("portfolio-theme-change", callback);
+  return () => window.removeEventListener("portfolio-theme-change", callback);
+}
+
+function getDarkThemeSnapshot(): "dark" | "light" {
+  return localStorage.getItem("hr_portfolio_theme") === "light" ? "light" : "dark";
+}
+
+function getDarkThemeServerSnapshot(): "dark" | "light" {
+  return "dark";
+}
+
 export function Navbar() {
-  const [mounted, setMounted] = useState(false);
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const mounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+  const theme = useSyncExternalStore(
+    subscribeDarkTheme,
+    getDarkThemeSnapshot,
+    getDarkThemeServerSnapshot
+  );
   const [activeSection, setActiveSection] = useState("about");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -22,14 +45,11 @@ export function Navbar() {
   });
 
   useEffect(() => {
-    setMounted(true);
     // Initial theme check
     const savedTheme = localStorage.getItem("hr_portfolio_theme");
     if (savedTheme === "light") {
-      setTheme("light");
       document.documentElement.classList.remove("dark");
     } else {
-      setTheme("dark");
       document.documentElement.classList.add("dark");
     }
 
@@ -56,15 +76,15 @@ export function Navbar() {
   }, []);
 
   const toggleTheme = () => {
-    if (theme === "dark") {
-      setTheme("light");
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    if (nextTheme === "light") {
       document.documentElement.classList.remove("dark");
       localStorage.setItem("hr_portfolio_theme", "light");
     } else {
-      setTheme("dark");
       document.documentElement.classList.add("dark");
       localStorage.setItem("hr_portfolio_theme", "dark");
     }
+    window.dispatchEvent(new CustomEvent("portfolio-theme-change"));
   };
 
   return (

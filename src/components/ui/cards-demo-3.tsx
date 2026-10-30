@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect } from "react";
-import { motion, animate } from "motion/react";
+import React from "react";
+import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
 export function Card({
@@ -86,33 +86,46 @@ export function CardSkeletonContainer({
   );
 }
 
+const SPARKLES = [
+  { top: "15%", left: "20%", moveX: "6px", moveY: "-8px", opacity: 0.8, duration: 3.5 },
+  { top: "45%", left: "80%", moveX: "-7px", moveY: "5px", opacity: 0.6, duration: 4.2 },
+  { top: "75%", left: "35%", moveX: "5px", moveY: "-6px", opacity: 0.9, duration: 3.1 },
+  { top: "25%", left: "70%", moveX: "-4px", moveY: "7px", opacity: 0.5, duration: 4.8 },
+  { top: "60%", left: "15%", moveX: "8px", moveY: "-5px", opacity: 0.7, duration: 3.8 },
+  { top: "85%", left: "60%", moveX: "-6px", moveY: "-6px", opacity: 0.85, duration: 4.5 },
+  { top: "35%", left: "50%", moveX: "4px", moveY: "8px", opacity: 0.65, duration: 3.3 },
+  { top: "10%", left: "90%", moveX: "-8px", moveY: "4px", opacity: 0.75, duration: 4.0 },
+  { top: "50%", left: "25%", moveX: "7px", moveY: "-7px", opacity: 0.9, duration: 3.7 },
+  { top: "70%", left: "85%", moveX: "-5px", moveY: "5px", opacity: 0.55, duration: 4.6 },
+  { top: "90%", left: "40%", moveX: "6px", moveY: "-4px", opacity: 0.8, duration: 3.9 },
+  { top: "30%", left: "10%", moveX: "-7px", moveY: "8px", opacity: 0.7, duration: 4.3 },
+];
+
 export const Sparkles = ({ count = 12 }: { count?: number }) => {
-  const randomMove = () => Math.random() * 2 - 1;
-  const randomOpacity = () => Math.random() * 0.7 + 0.3;
-  const random = () => Math.random();
+  const items = SPARKLES.slice(0, count);
 
   return (
     <div className="absolute inset-0 pointer-events-none">
-      {[...Array(count)].map((_, i) => (
+      {items.map((s, i) => (
         <motion.span
           key={`star-${i}`}
           animate={{
-            top: `calc(${random() * 100}% + ${randomMove() * 10}px)`,
-            left: `calc(${random() * 100}% + ${randomMove() * 10}px)`,
-            opacity: randomOpacity(),
+            top: `calc(${s.top} + ${s.moveY})`,
+            left: `calc(${s.left} + ${s.moveX})`,
+            opacity: s.opacity,
             scale: [1, 1.3, 0],
           }}
           transition={{
-            duration: random() * 2 + 3,
+            duration: s.duration,
             repeat: Infinity,
             ease: "linear",
           }}
           style={{
             position: "absolute",
-            top: `${random() * 100}%`,
-            left: `${random() * 100}%`,
-            width: `2px`,
-            height: `2px`,
+            top: s.top,
+            left: s.left,
+            width: "2px",
+            height: "2px",
             borderRadius: "50%",
             zIndex: 1,
           }}

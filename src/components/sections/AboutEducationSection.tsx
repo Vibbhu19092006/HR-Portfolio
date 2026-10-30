@@ -13,7 +13,6 @@ import {
   CheckCircle2,
   UserCheck,
   Target,
-  Award,
 } from "lucide-react";
 
 export function AboutEducationSection() {

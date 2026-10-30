@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 import { portfolioData } from "@/data/portfolio";
 import { AchievementCard } from "@/components/cards/AchievementCard";
 import { Card, CardTitle, CardDescription } from "@/components/ui/cards-demo-3";
-import { Trophy, LayoutGrid, Clock, Medal, Calendar, Award, CheckCircle2 } from "lucide-react";
+import { Trophy, LayoutGrid, Clock, Medal, CheckCircle2 } from "lucide-react";
 
 export function AchievementsSection() {
   const [viewMode, setViewMode] = useState<"grid" | "timeline">("grid");

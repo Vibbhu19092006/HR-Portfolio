@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { motion } from "motion/react";
 import { portfolioData } from "@/data/portfolio";
 import { CertificationCard } from "@/components/cards/CertificationCard";
-import { Award, CheckCircle, Shield } from "lucide-react";
+import { Award } from "lucide-react";
 
 export function CertificationsSection() {
   const [filter, setFilter] = useState<string>("All");

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { animate, motion } from "motion/react";
+import { animate } from "motion/react";
 import { cn } from "@/lib/utils";
 import {
   Card,
@@ -26,19 +26,19 @@ export default function CardDemo() {
   );
 }
 
-const HRSkeleton = () => {
-  const scale = [1, 1.08, 1];
-  const transform = ["translateY(0px)", "translateY(-4px)", "translateY(0px)"];
-  const sequence: any = [
-    [".badge-1", { scale, transform }, { duration: 0.8 }],
-    [".badge-2", { scale, transform }, { duration: 0.8 }],
-    [".badge-3", { scale, transform }, { duration: 0.8 }],
-    [".badge-4", { scale, transform }, { duration: 0.8 }],
-    [".badge-5", { scale, transform }, { duration: 0.8 }],
-  ];
+const scale = [1, 1.08, 1];
+const transform = ["translateY(0px)", "translateY(-4px)", "translateY(0px)"];
+const hrSequence = [
+  [".badge-1", { scale, transform }, { duration: 0.8 }],
+  [".badge-2", { scale, transform }, { duration: 0.8 }],
+  [".badge-3", { scale, transform }, { duration: 0.8 }],
+  [".badge-4", { scale, transform }, { duration: 0.8 }],
+  [".badge-5", { scale, transform }, { duration: 0.8 }],
+] as Parameters<typeof animate>[0];
 
+const HRSkeleton = () => {
   useEffect(() => {
-    animate(sequence, {
+    animate(hrSequence, {
       repeat: Infinity,
       repeatDelay: 1,
     });

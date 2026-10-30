@@ -1,10 +1,9 @@
 "use client";
 
 import React from "react";
-import { Card, CardTitle, CardDescription, Sparkles } from "@/components/ui/cards-demo-3";
-import { ImagesBadge } from "@/components/ui/images-badge";
+import { Card, CardTitle } from "@/components/ui/cards-demo-3";
 import { ProjectItem } from "@/data/portfolio";
-import { ExternalLink, Calendar, Code2, Layers, CheckCircle } from "lucide-react";
+import { Calendar, Code2, Layers, CheckCircle } from "lucide-react";
 import { GitHubIcon } from "@/components/Icons";
 
 export function ProjectCard({ project }: { project: ProjectItem }) {

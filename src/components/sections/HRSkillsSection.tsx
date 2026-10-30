@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 import { portfolioData } from "@/data/portfolio";
-import { Card, CardTitle, CardDescription } from "@/components/ui/cards-demo-3";
 import {
   Users,
   UserCheck,
@@ -15,9 +14,7 @@ import {
   ListTodo,
   MessageSquare,
   Award,
-  Sparkles,
   ShieldCheck,
-  Target,
 } from "lucide-react";
 
 export function HRSkillsSection() {

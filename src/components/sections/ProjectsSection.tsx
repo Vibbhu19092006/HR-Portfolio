@@ -4,7 +4,7 @@ import React from "react";
 import { motion } from "motion/react";
 import { portfolioData } from "@/data/portfolio";
 import { ProjectCard } from "@/components/cards/ProjectCard";
-import { FolderGit2, Sparkles, Terminal } from "lucide-react";
+import { FolderGit2 } from "lucide-react";
 
 export function ProjectsSection() {
   return (

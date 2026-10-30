@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { useScroll, useTransform } from "motion/react";
 import { portfolioData } from "@/data/portfolio";
 import { GoogleGeminiEffect } from "@/components/ui/google-gemini-effect";
 import { ImagesBadge } from "@/components/ui/images-badge";

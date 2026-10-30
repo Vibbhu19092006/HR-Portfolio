@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
-import { X, ExternalLink, ZoomIn } from "lucide-react";
+import { X, ZoomIn } from "lucide-react";
 
 export interface ImagesBadgeProps {
   text: string;

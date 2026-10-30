@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Card, CardTitle, CardDescription } from "@/components/ui/cards-demo-3";
+import { Card, CardTitle } from "@/components/ui/cards-demo-3";
 import { CertificationItem } from "@/data/portfolio";
 import { Award, Calendar, CheckCircle2, ShieldCheck } from "lucide-react";
 

@@ -1,10 +1,9 @@
 "use client";
 
 import React from "react";
-import { Card, CardTitle, CardDescription, Sparkles } from "@/components/ui/cards-demo-3";
-import { ImagesBadge } from "@/components/ui/images-badge";
+import { Card, CardTitle, CardDescription } from "@/components/ui/cards-demo-3";
 import { ExperienceItem } from "@/data/portfolio";
-import { Briefcase, Calendar, CheckCircle2, Building2 } from "lucide-react";
+import { Calendar, CheckCircle2, Building2 } from "lucide-react";
 
 export function ExperienceCard({ item }: { item: ExperienceItem }) {
   return (
